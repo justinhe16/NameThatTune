@@ -35,6 +35,7 @@ public class PlayThatTune {
         while (!StdIn.isEmpty()) {
         	//creates an array of integers of all of the input on one line
         	int[] inputArray = new int[5]; 
+        	//needa see if this works and github recognizes
     
             // read in the pitch, where 0 = Concert A (A4)
             int pitch = StdIn.readInt();

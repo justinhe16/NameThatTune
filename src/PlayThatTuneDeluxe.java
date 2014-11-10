@@ -57,6 +57,36 @@ public class PlayThatTuneDeluxe {
         double[] h  = sum(hi, lo, .5, .5);
         return sum(a, h, .5, .5);
     }
+    
+    // create a major chord with a stem note (pitch)
+    public static double[] createMajorChord(int pitch, double t) {
+    	int pitch2 = pitch + 4;
+    	int pitch3 = pitch + 7;
+        double hz = 440.0 * Math.pow(2, pitch / 12.0);
+        double hz2 = 440.0 * Math.pow(2, pitch2 / 12.0);
+        double hz3 = 440.0 * Math.pow(2, pitch3 / 12.0);
+        double[] a  = tone(hz, t);
+        double[] a2 = tone(hz2, t);
+        double[] a3 = tone(hz3, t);
+        double[] h  = sum(a2, a3, .5, .5);
+        return sum(a, h, .5, .5);
+    }
+    
+    // creates a minor chord with a stem note (pitch)
+    public static double[] createMinorChord(int pitch, double t) {
+    	int pitch2 = pitch + 3;
+    	int pitch3 = pitch + 7;
+        double hz = 440.0 * Math.pow(2, pitch / 12.0);
+        double hz2 = 440.0 * Math.pow(2, pitch2 / 12.0);
+        double hz3 = 440.0 * Math.pow(2, pitch3 / 12.0);
+        double[] a  = tone(hz, t);
+        double[] a2 = tone(hz2, t);
+        double[] a3 = tone(hz3, t);
+        double[] h  = sum(a2, a3, .5, .5);
+        return sum(a, h, .5, .5);
+    }
+
+    
 
 
     // read in notes from standard input and play them on standard audio
@@ -66,7 +96,7 @@ public class PlayThatTuneDeluxe {
         while (!StdIn.isEmpty()) {
             int pitch = StdIn.readInt();
             double duration = StdIn.readDouble();
-            double[] a = note(pitch, duration);
+            double[] a = createMajorChord(pitch, duration);
             StdAudio.play(a);
         }
 

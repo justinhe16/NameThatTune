@@ -69,6 +69,7 @@ public class PlayThatTuneDeluxe {
         double[] a2 = tone(hz2, t);
         double[] a3 = tone(hz3, t);
         double[] h  = sum(a2, a3, .5, .5);
+        System.out.println(sum(a, h, .5, .5));
         return sum(a, h, .5, .5);
     }
     
@@ -85,7 +86,6 @@ public class PlayThatTuneDeluxe {
         double[] h  = sum(a2, a3, .5, .5);
         return sum(a, h, .5, .5);
     }
-
     
 
 

@@ -50,9 +50,15 @@ public class PlayThatTune {
             for (int i = 0; i <= N; i++) {
                 a[i] = Math.sin(2 * Math.PI * i * hz / StdAudio.SAMPLE_RATE);
             }
+            
+            //adding chords to the sound track
+            double[] b = new double[N+1];
+            for (int x = 0; x <= 10; x=x+4) {
+            	b = PlayThatTuneDeluxe.createMajorChord(pitch, duration);
+            }
 
             // play it using standard audio
-            StdAudio.play(a);
+            StdAudio.play(b);
         }
     }
 }

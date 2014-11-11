@@ -1,3 +1,6 @@
+import java.util.Random;
+
+
 
 /*************************************************************************
  *  Compilation:  javac PlayThatTune.java
@@ -28,37 +31,57 @@
  *************************************************************************/
 
 public class PlayThatTune {
+	static Random rand = new Random();
+	static Random rand2 = new Random();
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
+		int t = 0;
+		double duration;
+		int pitch;
+		int[] CPentatonic = new int[]{0,2,4,7,9}; 
+		double[] Duration = new double[]{0.25,0.5,1.0};
 
-        // repeat as long as there are more integers to read in
-        while (!StdIn.isEmpty()) {
-        	//creates an array of integers of all of the input on one line
-        	int[] inputArray = new int[5]; 
-        	//needa see if this works and github recognizes
-    
-            // read in the pitch, where 0 = Concert A (A4)
-            int pitch = StdIn.readInt();
+		// repeat as long as there are more integers to read in
+		//creates an array of integers of all of the input on one line
+		while(t < 16){
+			// read in the pitch, where 0 = Concert A (A4)
+			{
+				if (t == 15){
+					pitch = CPentatonic[0];
+				}
+				else
+					pitch = CPentatonic[rand.nextInt(CPentatonic.length - 1)];
+			}
+			// read in duration in seconds
+			{
+				if (t == 15){
+					duration = 1;
+				}
+				else 
+					duration = Duration[rand2.nextInt(Duration.length - 1)];
+			}
 
-            // read in duration in seconds
-            double duration = StdIn.readDouble();
+			// build sine wave with desired frequency
+			double hz = 440 * Math.pow(2, pitch / 12.0);
+			int N = (int) (StdAudio.SAMPLE_RATE * duration);
+			double[] a = new double[N+1];
+			for (int i = 0; i <= N; i++) {
+				a[i] = Math.sin(2 * Math.PI * i * hz / StdAudio.SAMPLE_RATE);
+			}
 
-            // build sine wave with desired frequency
-            double hz = 440 * Math.pow(2, pitch / 12.0);
-            int N = (int) (StdAudio.SAMPLE_RATE * duration);
-            double[] a = new double[N+1];
-            for (int i = 0; i <= N; i++) {
-                a[i] = Math.sin(2 * Math.PI * i * hz / StdAudio.SAMPLE_RATE);
-            }
-            
-            //adding chords to the sound track
-            double[] b = new double[N+1];
-            for (int x = 0; x <= 10; x=x+4) {
-            	b = PlayThatTuneDeluxe.createMajorChord(pitch, duration);
-            }
+			//adding chords to the sound track
+			double[] b = new double[N+1];
+			b = PlayThatTuneDeluxe.createMajorChord(CPentatonic[0], 1);
 
-            // play it using standard audio
-            StdAudio.play(b);
-        }
-    }
+
+			double[] combo = new double[N+1];
+			combo = PlayThatTuneDeluxe.sum(a, b, .7, .3);
+
+			System.out.println(t);
+			// play it using standard audio
+			StdAudio.play(combo);
+			t++; 
+		}
+	}
 }
+

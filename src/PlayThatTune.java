@@ -41,12 +41,12 @@ public class PlayThatTune {
 		int pitch;
 		int[] APentatonicChords = new int[]{0,2,4,7,9};
 		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19,21};
-		double[] Duration = new double[]{0.25,0.5,1.0};
+		double[] Duration = new double[]{0.5,0.25,0.25,1.0};
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
 		// repeat as long as there are more integers to read in
 		//creates an array of integers of all of the input on one line
-		while(t < 64){
+		while(t <= 64){
 			// read in the pitch, where 0 = Concert A (A4)
 			{
 				if (t == 64){
@@ -58,7 +58,7 @@ public class PlayThatTune {
 			// read in duration in seconds
 			{
 				if (t == 64){
-					duration = 1;
+					duration = 2;
 				}
 				else 
 					duration = Duration[rand2.nextInt(Duration.length - 1)];
@@ -74,7 +74,11 @@ public class PlayThatTune {
 
 			//adding chords to the sound track
 			double[] b = new double[N+1];
-			if (t % 4 == 0){
+			if (t == 64){
+				x = -12;
+				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
+			}
+			else if (t % 4 == 0){
 				x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
 			}

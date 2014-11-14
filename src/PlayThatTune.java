@@ -76,14 +76,14 @@ public class PlayThatTune {
 			double[] b = new double[N+1];
 			if (t == 64){
 				x = -12;
-				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
+				b = PlayThatTuneDeluxe.createMajorChord(x, 2);
 			}
 			else if (t % 4 == 0){
 				x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
-				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
+				b = PlayThatTuneDeluxe.createMajorChord(x, 1);
 			}
 			else {
-				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
+				b = PlayThatTuneDeluxe.createMajorChord(x, 1);
 			}
 			
 

@@ -36,32 +36,34 @@ public class PlayThatTune {
 	static Random rand3 = new Random();
 
 	public static void main(String[] args) {
+		StdDraw.setXscale(-1,1);
+		StdDraw.setYscale(-1,1);
+		
 		int t = 0;
 		double duration;
 		int pitch;
 		int[] APentatonicChords = new int[]{0,2,4,7,9};
-		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19,21};
-		double[] Duration = new double[]{0.5,0.25,0.25,1.0};
+		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19};
+		double[] Duration = new double[]{0.25,0.5};
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
-		// repeat as long as there are more integers to read in
-		//creates an array of integers of all of the input on one line
+		//a while loop to put a limit on the songs limit
 		while(t <= 64){
-			// read in the pitch, where 0 = Concert A (A4)
 			{
 				if (t == 64){
 					pitch = APentatonic[0];
 				}
 				else
-					pitch = APentatonic[rand.nextInt(APentatonic.length - 1)];
+					// The pitch is based upon a random choice from an array
+					pitch = APentatonic[rand.nextInt(APentatonic.length)];
 			}
-			// read in duration in seconds
 			{
 				if (t == 64){
 					duration = 2;
 				}
 				else 
-					duration = Duration[rand2.nextInt(Duration.length - 1)];
+					//The duration is based upon a random choice from an array
+					duration = Duration[rand2.nextInt(Duration.length)];
 			}
 
 			// build sine wave with desired frequency
@@ -79,11 +81,11 @@ public class PlayThatTune {
 				b = PlayThatTuneDeluxe.createMajorChord(x, 2);
 			}
 			else if (t % 4 == 0){
-				x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
-				b = PlayThatTuneDeluxe.createMajorChord(x, 1);
+				x = APentatonicChords[rand3.nextInt(APentatonicChords.length)] - 12;
+				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
 			}
 			else {
-				b = PlayThatTuneDeluxe.createMajorChord(x, 1);
+				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
 			}
 			
 
@@ -92,6 +94,7 @@ public class PlayThatTune {
 
 			System.out.println(t);
 			// play it using standard audio
+			StdDraw.show(20);
 			StdAudio.play(combo);
 			t++; 
 		}

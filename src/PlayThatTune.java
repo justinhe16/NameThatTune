@@ -90,12 +90,13 @@ public class PlayThatTune {
 			
 
 			double[] combo = new double[N+1];
-			combo = PlayThatTuneDeluxe.sum(a, b, .7, .3);
+			combo = PlayThatTuneDeluxe.sum(a, b, .4, .6);
 
 			System.out.println(t);
 			// play it using standard audio
-			StdDraw.show(20);
 			StdAudio.play(combo);
+			StdDraw.show(20);
+			//;
 			t++; 
 		}
 	}

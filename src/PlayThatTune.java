@@ -78,19 +78,19 @@ public class PlayThatTune {
 			double[] b = new double[N+1];
 			if (t == 64){
 				x = -12;
-				b = PlayThatTuneDeluxe.createMajorChord(x, 2);
+				b = MusicLib.createMajorChord(x, 2);
 			}
 			else if (t % 4 == 0){
 				x = APentatonicChords[rand3.nextInt(APentatonicChords.length)] - 12;
-				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
+				b = MusicLib.createMajorChord(x, duration);
 			}
 			else {
-				b = PlayThatTuneDeluxe.createMajorChord(x, duration);
+				b = MusicLib.createMajorChord(x, duration);
 			}
 			
 
 			double[] combo = new double[N+1];
-			combo = PlayThatTuneDeluxe.sum(a, b, .6, .4);
+			combo = MusicLib.sum(a, b, .6, .4);
 
 			System.out.println(t);
 			// play it using standard audio

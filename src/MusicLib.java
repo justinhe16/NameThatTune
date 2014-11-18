@@ -62,4 +62,11 @@ public class MusicLib {
         return sum(a, h, .5, .5);
     }
     
+    public static double[] VolumeChanger(double numA, double[] A) {
+		for (int i=0; i<A.length; i++){
+			A[i]=A[i]*numA;
+		}
+    	return A;
+    }
+    
 }

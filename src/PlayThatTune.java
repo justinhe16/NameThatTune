@@ -42,6 +42,7 @@ public class PlayThatTune {
 		int t = 0;
 		double duration;
 		int pitch;
+		double[] combo = null;
 		int[] APentatonicChords = new int[]{0,2,4,7,9};
 		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19};
 		double[] Duration = new double[]{0.25,0.5};
@@ -88,13 +89,16 @@ public class PlayThatTune {
 				b = MusicLib.createMajorChord(x, duration);
 			}
 			
-
-			double[] combo = new double[N+1];
+			// adds the chords to the melody
+			combo = new double[N+1];
 			combo = MusicLib.sum(a, b, .6, .4);
-
 			System.out.println(t);
+			
+			//test volume
+			a = MusicLib.VolumeChanger(0.5,a);
+			
 			// play it using standard audio
-			StdAudio.play(combo);
+			StdAudio.play(a);
 			StdDraw.show(20);
 			//;
 			t++; 

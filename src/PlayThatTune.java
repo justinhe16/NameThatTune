@@ -94,12 +94,10 @@ public class PlayThatTune {
 			combo = MusicLib.sum(a, b, .6, .4);
 			System.out.println(t);
 			
-			//test volume
-			a = MusicLib.VolumeChanger(0.5,a);
-			
 			// play it using standard audio
 			StdAudio.play(a);
 			StdDraw.show(20);
+			
 			//;
 			t++; 
 		}

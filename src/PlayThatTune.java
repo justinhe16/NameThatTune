@@ -49,7 +49,7 @@ public class PlayThatTune {
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
 		//a while loop to put a limit on the songs limit
-		while(t <= 64){
+		while(t <= 1000){
 			{
 				if (t == 64){
 					pitch = APentatonic[0];
@@ -95,7 +95,7 @@ public class PlayThatTune {
 			System.out.println(t);
 			
 			// play it using standard audio
-			StdAudio.play(a);
+			StdAudio.play(combo);
 			StdDraw.show(20);
 			
 			//;

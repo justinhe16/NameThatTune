@@ -144,7 +144,7 @@ public class PlayThatTune {
 
 			//;
 			try {
-		         File file = new File("Desktop/SheetMusic.txt");
+		         File file = new File("/Users/justinhe/Desktop/SheetMusic.txt");
 		         BufferedWriter output = new BufferedWriter(new FileWriter(file));
 		         output.write(pitch + ", " + duration);
 		         output.close();

@@ -50,12 +50,14 @@ public class PlayThatTune {
 		int[] APentatonicChords = new int[]{0,2,4,7,9};
 		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19};
 		double[] Duration = new double[]{0.25,0.5,1.0};
+		int[] notesfinal = new int[241];
+		double[] durationfinal = new double[241];
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
 		//a while loop to put a limit on the songs limit
-		while(t <= 1000){
+		while(t <= 240){
 			{
-				if (t == 1000){
+				if (t == 240){
 					pitch = APentatonic[0];
 				}
 				else
@@ -63,7 +65,7 @@ public class PlayThatTune {
 					pitch = APentatonic[rand.nextInt(APentatonic.length)];
 			}
 			{
-				if (t == 1000){
+				if (t == 240){
 					duration = 2;
 				}
 				else 
@@ -141,17 +143,20 @@ public class PlayThatTune {
 			}
 
 			StdDraw.show(20);
+			notesfinal[t] = pitch;
+			durationfinal[t] = duration;
 
-			//;
-			try {
-		         File file = new File("/Users/justinhe/Desktop/SheetMusic.txt");
-		         BufferedWriter output = new BufferedWriter(new FileWriter(file));
-		         output.write(pitch + ", " + duration);
-		         output.close();
-		       } catch ( IOException e ) {
-		          e.printStackTrace();
-		       }
 			t++; 
+		}
+		try {
+			File file = new File("/Users/justinhe/Desktop/SheetMusic.txt");
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			for (int r = 0; r < notesfinal.length; r++){
+				output.write(r + ". " + notesfinal[r] + ", " + durationfinal[r] + "\n");
+			}
+			output.close();
+		} catch ( IOException e ) {
+			e.printStackTrace();
 		}
 	}
 }

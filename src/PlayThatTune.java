@@ -1,4 +1,7 @@
+import java.io.BufferedWriter;
 import java.util.Random;
+
+import java.io.*;
 
 
 
@@ -34,24 +37,25 @@ public class PlayThatTune {
 	static Random rand = new Random();
 	static Random rand2 = new Random();
 	static Random rand3 = new Random();
+	static Random rand01 = new Random();
 
 	public static void main(String[] args) {
-		StdDraw.setXscale(-1,1);
-		StdDraw.setYscale(-1,1);
-		
+		StdDraw.setXscale(0,1);
+		StdDraw.setYscale(0,1);
+
 		int t = 0;
 		double duration;
 		int pitch;
 		double[] combo = null;
 		int[] APentatonicChords = new int[]{0,2,4,7,9};
 		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19};
-		double[] Duration = new double[]{0.25,0.5};
+		double[] Duration = new double[]{0.25,0.5,1.0};
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
 		//a while loop to put a limit on the songs limit
 		while(t <= 1000){
 			{
-				if (t == 64){
+				if (t == 1000){
 					pitch = APentatonic[0];
 				}
 				else
@@ -59,7 +63,7 @@ public class PlayThatTune {
 					pitch = APentatonic[rand.nextInt(APentatonic.length)];
 			}
 			{
-				if (t == 64){
+				if (t == 1000){
 					duration = 2;
 				}
 				else 
@@ -88,17 +92,65 @@ public class PlayThatTune {
 			else {
 				b = MusicLib.createMajorChord(x, duration);
 			}
-			
+
 			// adds the chords to the melody
 			combo = new double[N+1];
 			combo = MusicLib.sum(a, b, .6, .4);
 			System.out.println(t);
-			
+
 			// play it using standard audio
 			StdAudio.play(combo);
+
+			//everything that has to do with drawing the performance
+			StdDraw.clear();
+			if (pitch == APentatonic[0]){
+				StdDraw.setPenColor(StdDraw.MAGENTA);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if (pitch == APentatonic[1]){
+				StdDraw.setPenColor(StdDraw.GREEN);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[2]){
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[3]){
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[4]){
+				StdDraw.setPenColor(StdDraw.RED);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[5]){
+				StdDraw.setPenColor(StdDraw.PINK);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[6]){
+				StdDraw.setPenColor(StdDraw.CYAN);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[7]){
+				StdDraw.setPenColor(StdDraw.ORANGE);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+			else if(pitch == APentatonic[8]){
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
+			}
+
 			StdDraw.show(20);
-			
+
 			//;
+			try {
+		         File file = new File("Desktop/SheetMusic.txt");
+		         BufferedWriter output = new BufferedWriter(new FileWriter(file));
+		         output.write(pitch + ", " + duration);
+		         output.close();
+		       } catch ( IOException e ) {
+		          e.printStackTrace();
+		       }
 			t++; 
 		}
 	}

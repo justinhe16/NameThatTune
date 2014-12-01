@@ -1,12 +1,18 @@
 
 public class MusicLib {
-	// take weighted sum of two arrays
+/**
+ * Returns a array of double variable types, which essentially builds a sine curve that when passed
+ * through StdAudio.play() plays the sound. 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
     public static double[] sum(double[] a, double[] b, double awt, double bwt) {
-    //test
-        // precondition: arrays have the same length
         assert (a.length == b.length);
 
-        // compute the weighted sum
         double[] c = new double[a.length];
         for (int i = 0; i < a.length; i++) {
             c[i] = a[i]*awt + b[i]*bwt;

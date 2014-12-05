@@ -1,7 +1,11 @@
+/*Program: NameThatTune
+		Authors: Justin He and Conor Yuen
+		Date: December 5th, 2014
+		Notes: 
+*/
 import java.io.BufferedWriter;
 import java.util.Random;
 import java.io.*;
-
 import javax.sound.sampled.AudioFileFormat;
 
 /*************************************************************************
@@ -59,7 +63,7 @@ public class PlayThatTune {
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
 		//a while loop to put a limit on the songs limit
-		while(t <= 20){
+		while(t <= 240){
 			MusicLib.delayyesno = false;
 			{
 				if (t == 240){
@@ -98,7 +102,7 @@ public class PlayThatTune {
 
 			//adding chords to the sound track
 			double[] b = new double[N+1];
-			if (t == 64){
+			if (t == 240){
 				x = -12;
 				b = MusicLib.createMajorChord(x, 2);
 			}
@@ -113,7 +117,7 @@ public class PlayThatTune {
 			// adds the chords to the melody
 			combo = new double[N+1];
 			combo = MusicLib.sum(a, b, .6, .4);
-			System.out.println(combo.length);
+			System.out.println(t);
 
 			//everything that has to do with drawing the performance
 			//StdDraw.clear();

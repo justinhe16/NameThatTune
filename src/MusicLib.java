@@ -1,5 +1,6 @@
 
 public class MusicLib {
+	static boolean delayyesno = false;
 /**
  * Returns a array of double variable types, which essentially builds a sine curve that when passed
  * through StdAudio.play() plays the sound. 
@@ -20,8 +21,8 @@ public class MusicLib {
         return c;
     } 
 
-    // create a pure tone of the given frequency for the given duration
-    public static double[] tone(double hz, double duration) { 
+    // create a pure pitch of the given frequency for the given duration
+    public static double[] pitch(double hz, double duration) { 
         int N = (int) (StdAudio.SAMPLE_RATE * duration);
         double[] a = new double[N+1];
         for (int i = 0; i <= N; i++) {
@@ -33,9 +34,9 @@ public class MusicLib {
     // create a note with harmonics of of the given pitch, where 0 = concert A
     public static double[] note(int pitch, double t) {
         double hz = 440.0 * Math.pow(2, pitch / 12.0);
-        double[] a  = tone(hz, t);
-        double[] hi = tone(2*hz, t);
-        double[] lo = tone(hz/2, t);
+        double[] a  = pitch(hz, t);
+        double[] hi = pitch(2*hz, t);
+        double[] lo = pitch(hz/2, t);
         double[] h  = sum(hi, lo, .5, .5);
         return sum(a, h, .5, .5);
     }
@@ -47,9 +48,9 @@ public class MusicLib {
         double hz = 440.0 * Math.pow(2, pitch / 12.0);
         double hz2 = 440.0 * Math.pow(2, pitch2 / 12.0);
         double hz3 = 440.0 * Math.pow(2, pitch3 / 12.0);
-        double[] a  = tone(hz, t);
-        double[] a2 = tone(hz2, t);
-        double[] a3 = tone(hz3, t);
+        double[] a  = pitch(hz, t);
+        double[] a2 = pitch(hz2, t);
+        double[] a3 = pitch(hz3, t);
         double[] h  = sum(a2, a3, .5, .5);
         return sum(a, h, .5, .5);
     }
@@ -61,9 +62,9 @@ public class MusicLib {
         double hz = 440.0 * Math.pow(2, pitch / 12.0);
         double hz2 = 440.0 * Math.pow(2, pitch2 / 12.0);
         double hz3 = 440.0 * Math.pow(2, pitch3 / 12.0);
-        double[] a  = tone(hz, t);
-        double[] a2 = tone(hz2, t);
-        double[] a3 = tone(hz3, t);
+        double[] a  = pitch(hz, t);
+        double[] a2 = pitch(hz2, t);
+        double[] a3 = pitch(hz3, t);
         double[] h  = sum(a2, a3, .5, .5);
         return sum(a, h, .5, .5);
     }
@@ -73,6 +74,13 @@ public class MusicLib {
 			A[i]=A[i]*numA;
 		}
     	return A;
+    }
+    
+    public static int Delay(int intialnote){
+    	int echonote = intialnote;
+    	delayyesno = true;
+		return echonote;
+    	
     }
     
 }

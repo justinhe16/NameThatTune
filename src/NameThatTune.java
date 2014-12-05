@@ -3,11 +3,6 @@
 		Date: December 5th, 2014
 		Notes: 
 */
-import java.io.BufferedWriter;
-import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.AudioFileFormat;
-
 /*************************************************************************
  *  Compilation:  javac PlayThatTune.java
  *  Execution:    java PlayThatTune < input.txt
@@ -35,35 +30,39 @@ import javax.sound.sampled.AudioFileFormat;
  *  http://www.cs.princeton.edu/introcs/21function/tomsdiner.txt
  *
  *************************************************************************/
+import java.io.BufferedWriter; ////////////// Necessary 
+import java.util.Random; //////////////////// Imports
+import java.io.*;//////////////////////////// For 
+import javax.sound.sampled.AudioFileFormat;// Code
 
 public class NameThatTune {
-	static Random rand = new Random();
-	static Random rand2 = new Random();
-	static Random rand3 = new Random();
-	static Random rand01 = new Random();
+	static Random rand = new Random(); /// Random 
+	static Random rand2 = new Random();/// Variables
+	static Random rand3 = new Random();/// For 
+	static Random rand01 = new Random();// Code
 
 
 	public static void main(String[] args) {
-		StdDraw.setXscale(0,1);
-		StdDraw.setYscale(0,1);
+		StdDraw.setXscale(0,1); // sets the x-coordinate to 1
+		StdDraw.setYscale(0,1); // sets the y-coordinate to 1
 
-		int t = 0;
+		int t = 0; 
 		int k = 0;
-		double duration;
-		int pitch;
+		double duration; // variable for the duration of the song
+		int pitch; // variable for the pitch of the song
 		int lastnote=0;
 		double lastduration=0;
 		double[] combo = null;
-		int[] APentatonicChords = new int[]{0,2,4,7,9};
-		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19};
-		double[] Duration = new double[]{0.25,0.5,1.0};
+		int[] APentatonicChords = new int[]{0,2,4,7,9}; // numerical values to draw from to form the chords
+		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19}; // numerical values to draw from to form the notes
+		double[] Duration = new double[]{0.25,0.5,1.0}; // numerical values to draw from to determine length at which the note is being played
 		int[] notesfinal = new int[241];
 		double[] durationfinal = new double[241];
 		double[] sinesoundfinal = new double[10000000];
 		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
 
 		//a while loop to put a limit on the songs limit
-		while(t <= 240){
+		while(t <= 240){ 
 			MusicLib.delayyesno = false;
 			{
 				if (t == 240){
@@ -175,7 +174,7 @@ public class NameThatTune {
 			t++; 
 		}
 		// saves file (?)
-					StdAudio.save("ConorJustinMusic.wav", sinesoundfinal);
+					StdAudio.save("ConorJustinMusic.wav", sinesoundfinal); 
 		try {
 			File file = new File("SheetMusic.txt");
 			BufferedWriter output = new BufferedWriter(new FileWriter(file));

@@ -40,32 +40,31 @@ public class NameThatTune {
 	static Random rand2 = new Random();/// Variables
 	static Random rand3 = new Random();/// For 
 	static Random rand01 = new Random();// Code
-
-
+	
 	public static void main(String[] args) {
 		StdDraw.setXscale(0,1); // sets the x-coordinate to 1
 		StdDraw.setYscale(0,1); // sets the y-coordinate to 1
 
-		int t = 0; 
-		int k = 0;
-		double duration; // variable for the duration of the song
-		int pitch; // variable for the pitch of the song
-		int lastnote=0;
-		double lastduration=0;
-		double[] combo = null;
+		int t = 0; // Variable used to run notes over and over until the song ends
+		int k = 0; // Variable used to facilitate the exchange of elements in the array
+		double duration; // Variable for the duration of the song
+		int pitch; // Variable for the pitch of the song
+		int lastnote=0; // Variable used for the previous note played
+		double lastduration=0; // Variable used for the duration of the previous note
+		double[] combo = null; // Variable used for the combination of chords and notes
 		int[] APentatonicChords = new int[]{0,2,4,7,9}; // numerical values to draw from to form the chords
 		int[] APentatonic = new int[]{0,2,4,7,9,12,14,16,19}; // numerical values to draw from to form the notes
 		double[] Duration = new double[]{0.25,0.5,1.0}; // numerical values to draw from to determine length at which the note is being played
-		int[] notesfinal = new int[241];
-		double[] durationfinal = new double[241];
-		double[] sinesoundfinal = new double[10000000];
-		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12;
+		int[] notesfinal = new int[241]; // Array for the notes of the entire song
+		double[] durationfinal = new double[241]; // Array for the duration of the entire song
+		double[] sinesoundfinal = new double[10000000]; // Array used to export song into a .wav file
+		int x = APentatonicChords[rand3.nextInt(APentatonicChords.length - 1)] - 12; // Variable used to randomly choose the next note in the array
 
 		//a while loop to put a limit on the songs limit
-		while(t <= 240){ 
-			MusicLib.delayyesno = false;
+		while(t <= 240){ // While the duration of the song is still playing
+			MusicLib.delayyesno = false; // Variable used to check if the delay variable is on
 			{
-				if (t == 240){
+				if (t == 240){ //When the song is over
 					pitch = APentatonic[0];
 				}
 				else if (t % 10 == 0){

@@ -42,8 +42,8 @@ public class NameThatTune {
 	static Random rand01 = new Random();// Code
 	
 	public static void main(String[] args) {
-		StdDraw.setXscale(0,1); // sets the x-coordinate to 1
-		StdDraw.setYscale(0,1); // sets the y-coordinate to 1
+		StdDraw.setXscale(0,1); // sets the x-coordinate have a range of 0 to 1
+		StdDraw.setYscale(0,1); // sets the y-coordinate have a range of 0 to 1 
 
 		int t = 0; // Variable used to run notes over and over until the song ends
 		int k = 0; // Variable used to facilitate the exchange of elements in the array

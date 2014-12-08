@@ -65,9 +65,9 @@ public class NameThatTune {
 			MusicLib.delayyesno = false; // Variable used to check if the delay variable is on
 			{
 				if (t == 240){ //When the song is over
-					pitch = APentatonic[0];
+					pitch = APentatonic[0]; // Reverts back to the same note when the song is finished, so it always ends pleasantly
 				}
-				else if (t % 10 == 0){
+				else if (t % 10 == 0){ 
 					pitch = MusicLib.Delay(lastnote);
 				}
 				else
@@ -75,10 +75,10 @@ public class NameThatTune {
 					pitch = APentatonic[rand.nextInt(APentatonic.length)];
 			}
 			{
-				if (t == 240){
-					duration = 2;
+				if (t == 240){ // When the song is over
+					duration = 2; //The final note has a defined final duration
 				}
-				else if (t % 10 == 0){
+				else if (t % 10 == 0){ 
 					duration = lastduration;
 				}
 				else 
@@ -117,9 +117,9 @@ public class NameThatTune {
 			combo = MusicLib.sum(a, b, .6, .4);
 			System.out.println(t);
 
-			//everything that has to do with drawing the performance
+			//everything that has to do with drawing the performance: circle size corresponds with the duration, and circle color corresponds with the note
 			//StdDraw.clear();
-			if (pitch == APentatonic[0]){
+			if (pitch == APentatonic[0]){ 
 				StdDraw.setPenColor(StdDraw.MAGENTA);
 				StdDraw.filledCircle(rand01.nextFloat(),rand01.nextFloat(), duration/5);
 			}
@@ -157,11 +157,11 @@ public class NameThatTune {
 			}
 
 			// play it using standard audio
-			StdAudio.play(combo);
+			StdAudio.play(combo); // Playing the chords and the notes together
 			// create visualization
-			StdDraw.show();
+			StdDraw.show(); // Displays visuals
 			for (int i = 0; i < combo.length; i++){
-				sinesoundfinal[i+k] = combo[i];
+				sinesoundfinal[i+k] = combo[i]; //Array used to store array values for exporting to the .wav file
 			}
 			
 			k = k + combo.length;
@@ -173,17 +173,17 @@ public class NameThatTune {
 			t++; 
 		}
 		// saves file (?)
-					StdAudio.save("ConorJustinMusic.wav", sinesoundfinal); 
+					StdAudio.save("ConorJustinMusic.wav", sinesoundfinal); // Used to save code to a .wav file
 		try {
-			File file = new File("SheetMusic.txt");
-			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			File file = new File("SheetMusic.txt"); // Used to save sheet music as a text file
+			BufferedWriter output = new BufferedWriter(new FileWriter(file)); //Writes text file to source folder
 			for (int r = 0; r < notesfinal.length; r++){
-				output.write(r + ". " + notesfinal[r] + ", " + durationfinal[r] + "\n");
-			}
-			output.close();
+				output.write(r + ". " + notesfinal[r] + ", " + durationfinal[r] + "\n"); // printing the actual numbers into the file
+			} 
+			output.close(); //ends the text in the sheet music file
 		} catch ( IOException e ) {
 			e.printStackTrace();
-		}
+		}//Block used to catch errors
 	}
 }
 

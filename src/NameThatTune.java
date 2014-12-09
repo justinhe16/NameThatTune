@@ -63,6 +63,7 @@ public class NameThatTune {
 		//a while loop to put a limit on the songs limit
 		while(t <= 240){ // While the duration of the song is still playing
 			MusicLib.delayyesno = false; // Variable used to check if the delay variable is on
+			MusicLib.echoyesno = false;
 			{
 				if (t == 240){ //When the song is over
 					pitch = APentatonic[0]; // Reverts back to the same note when the song is finished, so it always ends pleasantly
@@ -100,6 +101,10 @@ public class NameThatTune {
 
 			if (t == 100){
 				a = MusicLib.ClickSound(a);
+			}
+			
+			if (MusicLib.echoyesno){
+				a = MusicLib.VolumeChanger(0.5,a);
 			}
 
 			//adding chords to the sound track

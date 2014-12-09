@@ -136,10 +136,10 @@ public class MusicLib {
 
 	}
 	
-	/** Description of Delay(double[] a)
-	 * Takes a double array and spits it back out to be played again, but silent.
-	 * @param a the array of sound about to be silenced
-	 * @return the sum of the original array and a counter array to create silence
+	/** Description of ClickSound(double[] a)
+	 * Takes an array of sound (sine wave thing) and spits back out that except with a click twist.
+	 * @param a the array of sound about to be 'clicked'
+	 * @return a after the clicking procedure has been carried out and the array carries a click sound
 	 */
 	public static double[] ClickSound(double[] a){
 		int x = 0;

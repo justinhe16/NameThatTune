@@ -6,6 +6,7 @@
  */
 public class MusicLib {
 	static boolean delayyesno = false;
+	static boolean echoyesno = false;
 	/** Description of sum(double[] a, double[] b, double awt, double bwt)
 	 * Returns an array of double data types, which essentially is a weighted sine curve 
 	 * that is a combination of input sine curves, that when passed through StdAudio.play(),
@@ -120,27 +121,37 @@ public class MusicLib {
 		return A;
 	}
 
-	/** Description of Delay(int intial note)
-	 * Takes a note and spits it back out to be played again; however, the echo'ed note
-	 * has changed volume, because delayyesno turns to true. This boolean value triggers a 
-	 * change in volume in the main args area of the program. 
-	 * @param initialnote the note that is to be 'delayed'
-	 * @return echonote the new note that is the same frequency as the old note and is played again in the program
+	/** Description of Delay(double[] a)
+	 * Takes a double array and spits it back out to be played again, but silent.
+	 * @param a the array of sound about to be silenced
+	 * @return the sum of the original array and a counter array to create silence
 	 */
-	public static int Delay(int initialnote){
-		int echonote = initialnote;
+	public static double[] Delay(double[] a){
+		double[] b = new double[a.length];
+		for (int r = 0; r<a.length; r++){
+			b[r] = -1*a[r];
+		}
 		delayyesno = true;
-		return echonote;
+		return sum(b,a,.5,.5);
 
 	}
-	/*public double[] mysterySound(double[] a){
+	
+	/** Description of Delay(double[] a)
+	 * Takes a double array and spits it back out to be played again, but silent.
+	 * @param a the array of sound about to be silenced
+	 * @return the sum of the original array and a counter array to create silence
+	 */
+	public static double[] ClickSound(double[] a){
 		int x = 0;
-		double hz = 440.0 * Math.pow(2, i / 12.0);
-		double[] glissandopernote = pitch(hz, 0.0625);
-		for (int i=0; i<glissandopernote.length; i++){
-			a[i+k] = glissandopernote[i]; //Array used to store array values for exporting to the .wav file
-			x = x + glissandopernote.length;
+		for (int i=0; i<1; i++){
+			double hz = 440.0 * Math.pow(2, i / 12.0);
+			double[] glissandopernote = pitch(hz, 0.1);
+			for (int y=0; y<glissandopernote.length; y++){
+				a[y] = glissandopernote[y]; //Array used to store array values for exporting to the .wav file
+				System.out.println(glissandopernote.length);
+				System.out.println(a.length);
+			}
 		}
 		return a;
-	}*/
+	}
 }

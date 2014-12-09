@@ -2,7 +2,7 @@
 		Authors: Justin He and Conor Yuen
 		Date: December 5th, 2014
 		Notes: 
-*/
+ */
 /*************************************************************************
  *  Compilation:  javac PlayThatTune.java
  *  Execution:    java PlayThatTune < input.txt
@@ -40,7 +40,7 @@ public class NameThatTune {
 	static Random rand2 = new Random();/// Variables
 	static Random rand3 = new Random();/// For 
 	static Random rand01 = new Random();// Code
-	
+
 	public static void main(String[] args) {
 		StdDraw.setXscale(0,1); // sets the x-coordinate have a range of 0 to 1
 		StdDraw.setYscale(0,1); // sets the y-coordinate have a range of 0 to 1 
@@ -67,9 +67,8 @@ public class NameThatTune {
 				if (t == 240){ //When the song is over
 					pitch = APentatonic[0]; // Reverts back to the same note when the song is finished, so it always ends pleasantly
 				}
-				else if (t % 10 == 0){ 
-					pitch = MusicLib.Delay(lastnote);
-				}
+				else if (t % 10 == 0)
+					pitch = lastnote;
 				else
 					// The pitch is based upon a random choice from an array
 					pitch = APentatonic[rand.nextInt(APentatonic.length)];
@@ -85,7 +84,7 @@ public class NameThatTune {
 					//The duration is based upon a random choice from an array
 					duration = Duration[rand2.nextInt(Duration.length)];
 			}
-
+			
 			// build sine wave with desired frequency
 			double hz = 440 * Math.pow(2, pitch / 12.0);
 			int N = (int) (StdAudio.SAMPLE_RATE * duration);
@@ -94,8 +93,13 @@ public class NameThatTune {
 				a[i] = Math.sin(2 * Math.PI * i * hz / StdAudio.SAMPLE_RATE);
 			}
 
-			if (MusicLib.delayyesno){
-				a = MusicLib.VolumeChanger(0.5, a);
+			//added timed ornaments (delay, click sound, echo...)
+			if (t % 30 == 0 && t % 4 != 0 && t != 0){
+				a = MusicLib.Delay(a);
+			}
+
+			if (t == 100){
+				a = MusicLib.ClickSound(a);
 			}
 
 			//adding chords to the sound track
@@ -163,7 +167,7 @@ public class NameThatTune {
 			for (int i = 0; i < combo.length; i++){
 				sinesoundfinal[i+k] = combo[i]; //Array used to store array values for exporting to the .wav file
 			}
-			
+
 			k = k + combo.length;
 			lastnote = pitch;
 			lastduration = duration;
@@ -173,7 +177,7 @@ public class NameThatTune {
 			t++; 
 		}
 		// saves file (?)
-					StdAudio.save("ConorJustinMusic.wav", sinesoundfinal); // Used to save code to a .wav file
+		StdAudio.save("ConorJustinMusic.wav", sinesoundfinal); // Used to save code to a .wav file
 		try {
 			File file = new File("SheetMusic.txt"); // Used to save sheet music as a text file
 			BufferedWriter output = new BufferedWriter(new FileWriter(file)); //Writes text file to source folder
